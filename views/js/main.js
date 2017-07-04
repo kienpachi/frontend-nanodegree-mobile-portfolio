@@ -501,10 +501,11 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+// ------ This function is triggering a forced synchronous layout (which is drastically lowering the FPS) ------
 //  var items = document.querySelectorAll('.mover');
 //  for (var i = 0; i < items.length; i++) {
 //    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-//    items[i].style.left = items[i].basicLeft + 100 * phase + 'px'; // this line takes 231.4 ms
+//    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
 //  }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
