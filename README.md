@@ -1,13 +1,16 @@
+<!--
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
 
 To get started, check out the repository and inspect the code.
+-->
 
 ### Getting started
 
 #### Part 1: Optimize PageSpeed Insights score for index.html
 
+<!--
 Some useful tips to help you get started:
 
 1. Check out the repository
@@ -29,12 +32,51 @@ Some useful tips to help you get started:
 1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
 
 Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+-->
+
+1. Removed the imported fonts to reduce load time.
+> *reduced about **39ms** of load time*
+
+
+2. Added **media** print to `print.css` file.
+
+
+3. Separated the portrait css from `style.css` file and added **media** portrait to it.
+
+
+4. Minified `style.css` and inlined it in `index.html`.
+> *reduced requests from server by **1** trip*
+
+5. Resized the used images and compressed them.
 
 #### Part 2: Optimize Frames per Second in pizza.html
 
+<!--
 To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+-->
+
+1. Tested FPS when scrolling using Chrome Dev Tools to determine the affecting problem.
+
+2. Reduced the number of generated Pizza in background the for loop from 200 to 32
+```javascript
+for (var i = 0; i < 32; i++) {
+    var elem = document.createElement('img');
+    /* pizza element specifications */
+    document.querySelector("#movingPizzas1").appendChild(elem);
+  }
+```
+
+3. Determined the newwidth based only on one `randomPizzaContainer` since they all have the same size
+
+4. Used this Web API call as its faster.
+```javascript
+document.getElementByClassName()
+```
+
+5. Excluded the `newwidth` calculation from the **For** loop iteration, because it has `.offsetwidth` which access the layout every single time which drastically lowers the FPS.
+
 
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
